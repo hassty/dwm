@@ -24,7 +24,8 @@ static char *colors[][3] = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "", "", "", "", "ﭮ", "", "", "", "" };
+static const char *defaulttagapps[] = {"alacritty", "pcmanfm", "freetube", "firefox", "discord", NULL, NULL, NULL, NULL };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -96,6 +97,7 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_r,      spawndefault,   {0} },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
