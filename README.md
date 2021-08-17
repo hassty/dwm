@@ -2,3 +2,11 @@
 
 ## Applied patches
 
+ - actualfullscreen
+ - alwayscenter
+ - default-tag-apps
+ - fixborders
+ - restartsig
+ - statuscmd
+ - systray
+ - xresources
