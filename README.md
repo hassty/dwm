@@ -23,6 +23,7 @@
  - shiftview
  - statuscmd
  - sticky
+ - swallow
  - systray
  - vanitygaps
  - xresources
