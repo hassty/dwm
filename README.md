@@ -11,5 +11,6 @@
  - restartsig
  - statuscmd
  - systray
+ - vanitygaps
  - xresources
  - zoomswap
