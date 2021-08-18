@@ -6,7 +6,9 @@
  - alwayscenter
  - default-tag-apps
  - fixborders
+ - pertag
  - restartsig
  - statuscmd
  - systray
  - xresources
+ - zoomswap
