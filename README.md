@@ -16,6 +16,7 @@
  - noborder
  - pertag
  - restartsig
+ - shiftview
  - statuscmd
  - systray
  - vanitygaps
