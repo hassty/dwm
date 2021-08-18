@@ -27,5 +27,6 @@
  - swapfocus
  - systray
  - vanitygaps
+ - winview
  - xresources
  - zoomswap
