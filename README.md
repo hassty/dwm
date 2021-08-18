@@ -5,8 +5,10 @@
  - actualfullscreen
  - alwayscenter
  - attachasideandbelow
+ - cyclelayouts
  - default-tag-apps
  - fixborders
+ - monitorrules
  - pertag
  - restartsig
  - statuscmd
