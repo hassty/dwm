@@ -19,6 +19,7 @@
  - noborder
  - pertag
  - restartsig
+ - savefloats
  - shiftview
  - statuscmd
  - systray
