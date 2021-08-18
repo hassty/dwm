@@ -15,6 +15,7 @@
  - killunsel
  - monitorrules
  - moveresize
+ - movestack
  - noborder
  - pertag
  - restartsig
