@@ -22,6 +22,7 @@
  - savefloats
  - shiftview
  - statuscmd
+ - sticky
  - systray
  - vanitygaps
  - xresources
