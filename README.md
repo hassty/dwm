@@ -10,6 +10,7 @@
  - cyclelayouts
  - default-tag-apps
  - fixborders
+ - focusmaster
  - monitorrules
  - noborder
  - pertag
