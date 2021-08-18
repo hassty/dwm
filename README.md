@@ -6,6 +6,7 @@
  - alwayscenter
  - attachasideandbelow
  - canfocusfloating
+ - centretitle
  - cyclelayouts
  - default-tag-apps
  - fixborders
