@@ -5,6 +5,7 @@
  - actualfullscreen
  - alwayscenter
  - attachasideandbelow
+ - canfocusfloating
  - cyclelayouts
  - default-tag-apps
  - fixborders
