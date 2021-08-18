@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Exit if there are unresolved patch errors
+ls *.rej 2>/dev/null && echo "unresolved patch errors" && exit 1
+
+# Build before commit
+sudo make clean install >/dev/null
