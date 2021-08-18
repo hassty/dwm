@@ -9,6 +9,7 @@
  - default-tag-apps
  - fixborders
  - monitorrules
+ - noborder
  - pertag
  - restartsig
  - statuscmd
