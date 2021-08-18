@@ -4,6 +4,7 @@
 
  - actualfullscreen
  - alwayscenter
+ - attachasideandbelow
  - default-tag-apps
  - fixborders
  - pertag
