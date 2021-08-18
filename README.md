@@ -24,6 +24,7 @@
  - statuscmd
  - sticky
  - swallow
+ - swapfocus
  - systray
  - vanitygaps
  - xresources

@@ -291,6 +291,7 @@ static void sighup(int unused);
 static void sigterm(int unused);
 static void sigstatusbar(const Arg *arg);
 static void spawn(const Arg *arg);
+static void swapfocus();
 static Monitor *systraytomon(Monitor *m);
 static void spawndefault();
 static void tag(const Arg *arg);
@@ -341,6 +342,7 @@ static pid_t winpid(Window w);
 
 /* variables */
 static Systray *systray =  NULL;
+static Client *prevclient = NULL;
 static Client *prevzoom = NULL;
 static const char broken[] = "broken";
 static char stext[256];
@@ -2431,6 +2433,17 @@ spawndefault()
 }
 
 void
+swapfocus()
+{
+	Client *c;
+	for(c = selmon->clients; c && c != prevclient; c = c->next) ;
+	if(c == prevclient) {
+		focus(prevclient);
+		restack(prevclient->mon);
+	}
+}
+
+void
 tag(const Arg *arg)
 {
 	if (selmon->sel && arg->ui & TAGMASK) {
@@ -2606,6 +2619,7 @@ unfocus(Client *c, int setfocus)
 {
 	if (!c)
 		return;
+	prevclient = c;
 	grabbuttons(c, 0);
 	XSetWindowBorder(dpy, c->win, scheme[SchemeNorm][ColBorder].pixel);
 	if (setfocus) {
@@ -3318,6 +3332,7 @@ zoom(const Arg *arg)
 {
 	Client *c = selmon->sel;
 	Client *at = NULL, *cold, *cprevious = NULL;
+	prevclient = nexttiled(selmon->clients);
 
 	if (!selmon->lt[selmon->sellt]->arrange
 	|| (selmon->sel && selmon->sel->isfloating))
@@ -3328,8 +3343,8 @@ zoom(const Arg *arg)
 			cprevious = nexttiled(at->next);
 		if (!cprevious || cprevious != prevzoom) {
 			prevzoom = NULL;
-			if (!c || !(c = nexttiled(c->next)))
-				return;
+            if (!c || !(c = prevclient = nexttiled(c->next)))
+                return;
 		} else
 			c = cprevious;
 	}
