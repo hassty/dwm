@@ -14,6 +14,7 @@
  - focusmaster
  - killunsel
  - monitorrules
+ - moveresize
  - noborder
  - pertag
  - restartsig
