@@ -11,6 +11,7 @@
  - default-tag-apps
  - fixborders
  - focusmaster
+ - killunsel
  - monitorrules
  - noborder
  - pertag
