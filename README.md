@@ -26,6 +26,7 @@
  - swallow
  - swapfocus
  - systray
+ - underlinetags
  - vanitygaps
  - winview
  - xresources
