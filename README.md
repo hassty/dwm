@@ -16,6 +16,7 @@
  - monitorrules
  - moveresize
  - movestack
+ - namedscratchpads
  - noborder
  - pertag
  - restartsig

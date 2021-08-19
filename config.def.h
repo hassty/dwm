@@ -43,15 +43,17 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating  isterminal  noswallow  monitor */
-	{ "Pcmanfm",  NULL,       NULL,       1 << 1,       0,          0,          -1,        -1 },
-	{ "FreeTube", NULL,       NULL,       1 << 2,       0,          0,          -1,        -1 },
-	{ "firefox",  NULL,       NULL,       1 << 3,       0,          0,          -1,        -1 },
-	{ "discord",  NULL,       NULL,       1 << 4,       0,          0,          -1,        -1 },
-	{ "mpv",      NULL,       NULL,       1 << 5,       0,          0,           0,        -1 },
-	{ "obs",      NULL,       NULL,       1 << 6,       0,          0,          -1,        -1 },
-	{ "Alacritty",NULL,       NULL,       0,            0,          1,          -1,        -1 },
-	{ "Gnome-calculator",NULL,NULL,       0,            1,          0,          -1,        -1 },
+	/* class               instance  title          tags mask  isfloating  isterminal  noswallow  monitor  scratch key*/
+	{ "Pcmanfm",           NULL,     NULL,          1 << 1,    0,          0,          -1,        -1,      0 },
+	{ "FreeTube",          NULL,     NULL,          1 << 2,    0,          0,          -1,        -1,      0 },
+	{ "firefox",           NULL,     NULL,          1 << 3,    0,          0,          -1,        -1,      0 },
+	{ "discord",           NULL,     NULL,          1 << 4,    0,          0,          -1,        -1,      0 },
+	{ "mpv",               NULL,     NULL,          1 << 5,    0,          0,           0,        -1,      0 },
+	{ "obs",               NULL,     NULL,          1 << 6,    0,          0,          -1,        -1,      0 },
+	{ "Alacritty",         NULL,     NULL,          0,         0,          1,          -1,        -1,      0 },
+	{ "Gnome-calculator",  NULL,     NULL,          0,         1,          0,          -1,        -1,      0 },
+	{ NULL,                NULL,     "scratchpad",  0,         1,          0,          -1,        -1,      't' },
+	{ NULL,                NULL,     "vifm",        0,         1,          0,          -1,        -1,      'f' },
 };
 
 /* layout(s) */
@@ -110,6 +112,10 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-c", "-l", "10", "-h", "20", "-bw", "2", NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 
+/*First arg only serves to match against key in rules*/
+static const char *scratchpadcmd[] = {"t", "alacritty", "-t", "scratchpad", NULL}; 
+static const char *vifmcmd[]       = {"f", "alacritty", "-t", "vifm", "-e", "/home/hasty/.config/vifm/scripts/vifmrun", NULL}; 
+
 /*
  * Xresources preferences to load at startup
  */
@@ -141,6 +147,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_r,      spawndefault,   {0} },
+	{ MODKEY,                       XK_w,      togglescratch,  {.v = scratchpadcmd } },
+	{ MODKEY,                       XK_e,      togglescratch,  {.v = vifmcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_s,      swapfocus,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
