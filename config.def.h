@@ -54,6 +54,7 @@ static const Rule rules[] = {
 	{ "Gnome-calculator",  NULL,     NULL,          0,         1,          0,          -1,        -1,      0 },
 	{ NULL,                NULL,     "scratchpad",  0,         1,          0,          -1,        -1,      't' },
 	{ NULL,                NULL,     "vifm",        0,         1,          0,          -1,        -1,      'f' },
+	{ NULL,                NULL,     "Event Tester",0,         0,          0,           1,        -1,      0 }, /* xev */
 };
 
 /* layout(s) */
