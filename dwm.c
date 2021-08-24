@@ -1327,7 +1327,7 @@ getsystraywidth()
 	Client *i;
 	if(showsystray)
 		for(i = systray->icons; i; w += i->w + systrayspacing, i = i->next) ;
-	return w ? w + systrayspacing : 1;
+	return w ? w + systrayspacing : 0;
 }
 
 int
