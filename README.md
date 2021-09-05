@@ -12,6 +12,7 @@
  - fixborders
  - focusadjacenttag
  - focusmaster
+ - keycodes
  - killunsel
  - monitorrules
  - moveresize
