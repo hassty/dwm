@@ -31,7 +31,7 @@ static char *colors[][3] = {
 
 /* tagging */
 static const char *tags[] = { "", "", "", "", "ﭮ", "", "", "", "" };
-static const char *defaulttagapps[] = {"alacritty", "pcmanfm", "freetube", "firefox", "discord", NULL, NULL, NULL, NULL };
+static const char *defaulttagapps[] = {"st", "pcmanfm", "freetube", "firefox", "discord", NULL, NULL, NULL, NULL };
 
 static const unsigned int ulinepad	= 1;	/* horizontal padding between the underline and tag */
 static const unsigned int ulinestroke	= 2;	/* thickness / height of the underline */
@@ -50,7 +50,7 @@ static const Rule rules[] = {
 	{ "discord",           NULL,     NULL,          1 << 4,    0,          0,          -1,        -1,      0 },
 	{ "mpv",               NULL,     NULL,          1 << 5,    0,          0,           0,        -1,      0 },
 	{ "obs",               NULL,     NULL,          1 << 6,    0,          0,          -1,        -1,      0 },
-	{ "Alacritty",         NULL,     NULL,          0,         0,          1,          -1,        -1,      0 },
+	{ "St",                NULL,     NULL,          0,         0,          1,          -1,        -1,      0 },
 	{ "Gnome-calculator",  NULL,     NULL,          0,         1,          0,          -1,        -1,      0 },
 	{ NULL,                NULL,     "scratchpad",  0,         1,          0,          -1,        -1,      't' },
 	{ NULL,                NULL,     "vifm",        0,         1,          0,          -1,        -1,      'f' },
@@ -111,11 +111,11 @@ static const MonitorRule monrules[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-c", "-l", "10", "-h", "20", NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
+static const char *termcmd[]  = { "st", NULL };
 
 /*First arg only serves to match against key in rules*/
-static const char *scratchpadcmd[] = {"t", "alacritty", "-t", "scratchpad", NULL}; 
-static const char *vifmcmd[]       = {"f", "alacritty", "-t", "vifm", "-e", "/home/hasty/.config/vifm/scripts/vifmrun", NULL}; 
+static const char *scratchpadcmd[] = {"t", "st", "-t", "scratchpad", NULL}; 
+static const char *vifmcmd[]       = {"f", "st", "-t", "vifm", "-e", "/home/hasty/.config/vifm/scripts/vifmrun", NULL}; 
 
 /*
  * Xresources preferences to load at startup
@@ -144,97 +144,101 @@ ResourcePref resources[] = {
 #include "movestack.c"
 #include "shiftview.c"
 static Key keys[] = {
-	/* modifier                     key        function        argument */
-	{ MODKEY,                       33,        spawn,          {.v = dmenucmd } },
-	{ MODKEY,                       36,        spawn,          {.v = termcmd } },
-	{ MODKEY,                       27,        spawndefault,   {0} },
-	{ MODKEY,                       25,        togglescratch,  {.v = scratchpadcmd } },
-	{ MODKEY,                       26,        togglescratch,  {.v = vifmcmd } },
-	{ MODKEY,                       56,        togglebar,      {0} },
-	{ MODKEY,                       39,        swapfocus,      {0} },
-	{ MODKEY,                       44,        focusstack,     {.i = +1 } },
-	{ MODKEY,                       45,        focusstack,     {.i = -1 } },
-    { MODKEY,                       65,        focusmaster,    {0} },
-	{ MODKEY,                       31,        incnmaster,     {.i = +1 } },
-	{ MODKEY,                       40,        incnmaster,     {.i = -1 } },
-	{ MODKEY,                       43,        setmfact,       {.f = -0.05} },
-	{ MODKEY,                       46,        setmfact,       {.f = +0.05} },
-	{ MODKEY|ShiftMask,             43,        setcfact,       {.f = +0.25} },
-	{ MODKEY|ShiftMask,             46,        setcfact,       {.f = -0.25} },
-	{ MODKEY|ShiftMask,             32,        setcfact,       {.f =  0.00} },
-	{ MODKEY|ShiftMask,             44,        movestack,      {.i = +1 } },
-	{ MODKEY|ShiftMask,             45,        movestack,      {.i = -1 } },
-    { MODKEY|ControlMask,           39,        togglecanfocusfloating,   {0} },
-	{ MODKEY|ShiftMask,             36,        zoom,           {0} },
-	{ MODKEY|Mod1Mask,              19,        togglegaps,     {0} },
-	{ MODKEY,                       23,        view,           {0} },
-	{ MODKEY,                       54,        killclient,     {0} },
-	{ MODKEY,                       53,        killunsel,      {0} },
-	{ MODKEY,                       28,        setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       41,        setlayout,      {.v = &layouts[1]} },
-	{ MODKEY|ControlMask,		    59,        cyclelayout,    {.i = -1 } },
-	{ MODKEY|ControlMask,           60,        cyclelayout,    {.i = +1 } },
-	{ MODKEY|ControlMask,           65,        setlayout,      {0} },
-	{ MODKEY|ShiftMask,             65,        togglefloating, {0} },
-	{ MODKEY|ShiftMask,             39,        togglesticky,   {0} },
-	{ MODKEY|ShiftMask,             41,        togglefullscr,  {0} },
-	{ MODKEY,                       19,        view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             19,        tag,            {.ui = ~0 } },
-	{ MODKEY,                       58,        focusmon,       {.i = -1 } },
-	{ MODKEY,                       61,        focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             58,        tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             61,        tagmon,         {.i = +1 } },
-	{ MODKEY,                       59,        shiftviewjump,  {.i = -1 } },
-	{ MODKEY,                       60,        shiftviewjump,  {.i = +1 } },
-	{ MODKEY|Mod1Mask,              59,        shiftview,      {.i = -1 } },
-	{ MODKEY|Mod1Mask,              60,        shiftview,      {.i = +1 } },
-	{ MODKEY|ShiftMask,             59,        tagtoleft,      {0} },
-	{ MODKEY|ShiftMask,             60,        tagtoright,     {0} },
-	{ MODKEY,                       116,       moveresize,     {.v = "0x 25y 0w 0h" } },
-	{ MODKEY,                       111,       moveresize,     {.v = "0x -25y 0w 0h" } },
-	{ MODKEY,                       114,       moveresize,     {.v = "25x 0y 0w 0h" } },
-	{ MODKEY,                       113,       moveresize,     {.v = "-25x 0y 0w 0h" } },
-	{ MODKEY|ShiftMask,             116,       moveresize,     {.v = "0x 0y 0w 25h" } },
-	{ MODKEY|ShiftMask,             111,       moveresize,     {.v = "0x 0y 0w -25h" } },
-	{ MODKEY|ShiftMask,             114,       moveresize,     {.v = "0x 0y 25w 0h" } },
-	{ MODKEY|ShiftMask,             113,       moveresize,     {.v = "0x 0y -25w 0h" } },
-	{ MODKEY|ControlMask,           111,       moveresizeedge, {.v = "t"} },
-	{ MODKEY|ControlMask,           116,       moveresizeedge, {.v = "b"} },
-	{ MODKEY|ControlMask,           113,       moveresizeedge, {.v = "l"} },
-	{ MODKEY|ControlMask,           114,       moveresizeedge, {.v = "r"} },
-	{ MODKEY|ControlMask|ShiftMask, 111,       moveresizeedge, {.v = "T"} },
-	{ MODKEY|ControlMask|ShiftMask, 116,       moveresizeedge, {.v = "B"} },
-	{ MODKEY|ControlMask|ShiftMask, 113,       moveresizeedge, {.v = "L"} },
-	{ MODKEY|ControlMask|ShiftMask, 114,       moveresizeedge, {.v = "R"} },
-	TAGKEYS(                        10,                           0)
-	TAGKEYS(                        11,                           1)
-	TAGKEYS(                        12,                           2)
-	TAGKEYS(                        13,                           3)
-	TAGKEYS(                        14,                           4)
-	TAGKEYS(                        15,                           5)
-	TAGKEYS(                        16,                           6)
-	TAGKEYS(                        17,                           7)
-	TAGKEYS(                        18,                           8)
-	{ MODKEY,                       32,        winview,        {0} },
-	{ MODKEY|ShiftMask,             24,        quit,           {0} },
-	{ MODKEY|ShiftMask,             27,        quit,           {1} }, 
+    /* modifier                     key        function         argument */
+    { MODKEY,                       33,        spawn,           { .v = dmenucmd } },
+    { MODKEY,                       36,        spawn,           { .v = termcmd } },
+    { MODKEY,                       27,        spawndefault,    { 0 } },
+    { MODKEY,                       25,        togglescratch,   { .v = scratchpadcmd } },
+    { MODKEY,                       26,        togglescratch,   { .v = vifmcmd } },
+    { MODKEY,                       56,        togglebar,       { 0 } },
+    { MODKEY,                       39,        swapfocus,       { 0 } },
+    { MODKEY,                       44,        focusstack,      { .i = +1 } },
+    { MODKEY,                       45,        focusstack,      { .i = -1 } },
+    { MODKEY,                       65,        focusmaster,     { 0 } },
+    { MODKEY,                       31,        incnmaster,      { .i = +1 } },
+    { MODKEY,                       40,        incnmaster,      { .i = -1 } },
+    { MODKEY,                       43,        setmfact,        { .f = -0.05 } },
+    { MODKEY,                       46,        setmfact,        { .f = +0.05 } },
+    { MODKEY|ShiftMask,             43,        setcfact,        { .f = +0.25 } },
+    { MODKEY|ShiftMask,             46,        setcfact,        { .f = -0.25 } },
+    { MODKEY|ShiftMask,             32,        setcfact,        { .f = 0.00 } },
+    { MODKEY|ShiftMask,             44,        movestack,       { .i = +1 } },
+    { MODKEY|ShiftMask,             45,        movestack,       { .i = -1 } },
+    { MODKEY|ControlMask,           39,        togglecanfocusfloating, { 0 } },
+    { MODKEY|ShiftMask,             36,        zoom,            { 0 } },
+    { MODKEY|Mod1Mask,              19,        togglegaps,      { 0 } },
+    { MODKEY,                       23,        view,            { 0 } },
+    { MODKEY,                       54,        killclient,      { 0 } },
+    { MODKEY,                       53,        killunsel,       { 0 } },
+    { MODKEY,                       28,        setlayout,       { .v = &layouts[0] } },
+    { MODKEY|ShiftMask,             41,        setlayout,       { .v = &layouts[1] } },
+    { MODKEY|ControlMask,           59,        cyclelayout,     { .i = -1 } },
+    { MODKEY|ControlMask,           60,        cyclelayout,     { .i = +1 } },
+    { MODKEY|ControlMask,           65,        setlayout,       { 0 } },
+    { MODKEY|ShiftMask,             65,        togglefloating,  { 0 } },
+    { MODKEY|ShiftMask,             39,        togglesticky,    { 0 } },
+    { MODKEY,                       41,        togglefullscr,   { 0 } },
+    { MODKEY,                       19,        view,            { .ui = ~0 } },
+    { MODKEY|ShiftMask,             19,        tag,             { .ui = ~0 } },
+    { MODKEY,                       58,        focusmon,        { .i = -1 } },
+    { MODKEY,                       61,        focusmon,        { .i = +1 } },
+    { MODKEY|ShiftMask,             58,        tagmon,          { .i = -1 } },
+    { MODKEY|ShiftMask,             61,        tagmon,          { .i = +1 } },
+    { MODKEY,                       59,        shiftviewjump,   { .i = -1 } },
+    { MODKEY,                       60,        shiftviewjump,   { .i = +1 } },
+    { MODKEY|Mod1Mask,              59,        shiftview,       { .i = -1 } },
+    { MODKEY|Mod1Mask,              60,        shiftview,       { .i = +1 } },
+    { MODKEY|ShiftMask,             59,        tagtoleft,       { 0 } },
+    { MODKEY|ShiftMask,             60,        tagtoright,      { 0 } },
+    { MODKEY,                       116,       moveresize,      { .v = "0x 25y 0w 0h" } },
+    { MODKEY,                       111,       moveresize,      { .v = "0x -25y 0w 0h" } },
+    { MODKEY,                       114,       moveresize,      { .v = "25x 0y 0w 0h" } },
+    { MODKEY,                       113,       moveresize,      { .v = "-25x 0y 0w 0h" } },
+    { MODKEY|ShiftMask,             116,       moveresize,      { .v = "0x 0y 0w 25h" } },
+    { MODKEY|ShiftMask,             111,       moveresize,      { .v = "0x 0y 0w -25h" } },
+    { MODKEY|ShiftMask,             114,       moveresize,      { .v = "0x 0y 25w 0h" } },
+    { MODKEY|ShiftMask,             113,       moveresize,      { .v = "0x 0y -25w 0h" } },
+    { MODKEY|ControlMask,           111,       moveresizeedge,  { .v = "t" } },
+    { MODKEY|ControlMask,           116,       moveresizeedge,  { .v = "b" } },
+    { MODKEY|ControlMask,           113,       moveresizeedge,  { .v = "l" } },
+    { MODKEY|ControlMask,           114,       moveresizeedge,  { .v = "r" } },
+    { MODKEY|ControlMask|ShiftMask, 111,       moveresizeedge,  { .v = "T" } },
+    { MODKEY|ControlMask|ShiftMask, 116,       moveresizeedge,  { .v = "B" } },
+    { MODKEY|ControlMask|ShiftMask, 113,       moveresizeedge,  { .v = "L" } },
+    { MODKEY|ControlMask|ShiftMask, 114,       moveresizeedge,  { .v = "R" } },
+    TAGKEYS(                        10,        0)
+    TAGKEYS(                        11,        1)
+    TAGKEYS(                        12,        2)
+    TAGKEYS(                        13,        3)
+    TAGKEYS(                        14,        4)
+    TAGKEYS(                        15,        5)
+    TAGKEYS(                        16,        6)
+    TAGKEYS(                        17,        7)
+    TAGKEYS(                        18,        8)
+    { MODKEY,                       32,        winview,         { 0 } },
+    { MODKEY|ShiftMask,             24,        quit,            { 0 } },
+    { MODKEY|ShiftMask,             27,        quit,            { 1 } },
 };
 
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static Button buttons[] = {
 	/* click                event mask      button          function        argument */
-	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
-	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button1,        sigstatusbar,   {.i = 1} },
-	{ ClkStatusText,        0,              Button2,        sigstatusbar,   {.i = 2} },
-	{ ClkStatusText,        0,              Button3,        sigstatusbar,   {.i = 3} },
-	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
-	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
-	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
-	{ ClkTagBar,            0,              Button1,        view,           {0} },
-	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
-	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
-	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+	{ ClkLtSymbol,          0,              Button1,        setlayout,      { 0 } },
+	{ ClkLtSymbol,          0,              Button3,        setlayout,      { .v = &layouts[2] } },
+	{ ClkWinTitle,          0,              Button2,        zoom,           { 0 } },
+	{ ClkStatusText,        0,              Button1,        sigstatusbar,   { .i = 1 } },
+	{ ClkStatusText,        0,              Button2,        sigstatusbar,   { .i = 2 } },
+	{ ClkStatusText,        0,              Button3,        sigstatusbar,   { .i = 3 } },
+	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      { 0 } },
+	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, { 0 } },
+	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    { 0 } },
+	{ ClkTagBar,            0,              Button1,        view,           { 0 } },
+	{ ClkTagBar,            0,              Button3,        toggleview,     { 0 } },
+	{ ClkTagBar,            MODKEY,         Button1,        tag,            { 0 } },
+	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      { 0 } },
+    { ClkTagBar,            0,              Button1,        view,           { 0 } },
+    { ClkTagBar,            0,              Button3,        toggleview,     { 0 } },
+    { ClkTagBar,            MODKEY,         Button1,        tag,            { 0 } },
+    { ClkTagBar,            MODKEY,         Button3,        toggletag,      { 0 } },
 };
