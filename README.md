@@ -7,6 +7,7 @@
  - attachasideandbelow
  - canfocusfloating
  - centretitle
+ - colorbar
  - cyclelayouts
  - default-tag-apps
  - fixborders
