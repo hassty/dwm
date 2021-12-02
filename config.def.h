@@ -48,12 +48,14 @@ static const Rule rules[] = {
 	/* class               instance  title          tags mask  isfloating  isterminal  noswallow  monitor  scratch key*/
 	{ "Pcmanfm",           NULL,     NULL,          1 << 1,    0,          0,          -1,        -1,      0 },
 	{ "FreeTube",          NULL,     NULL,          1 << 2,    0,          0,          -1,        -1,      0 },
+	{ "Ghidra",            NULL,     NULL,          1 << 2,    0,          0,          -1,        -1,      0 },
 	{ "firefox",           NULL,     NULL,          1 << 3,    0,          0,          -1,        -1,      0 },
 	{ "discord",           NULL,     NULL,          1 << 4,    0,          0,          -1,        -1,      0 },
 	{ "mpv",               NULL,     NULL,          1 << 5,    0,          0,           0,        -1,      0 },
 	{ "obs",               NULL,     NULL,          1 << 6,    0,          0,          -1,        -1,      0 },
 	{ "St",                NULL,     NULL,          0,         0,          1,          -1,        -1,      0 },
 	{ "Gnome-calculator",  NULL,     NULL,          0,         1,          0,          -1,        -1,      0 },
+	{ "edb",               NULL,     NULL,          0,         0,          0,          -1,        -1,      0 },
 	{ NULL,                NULL,     "scratchpad",  0,         1,          0,          -1,        -1,      't' },
 	{ NULL,                NULL,     "vifm",        0,         1,          0,          -1,        -1,      'f' },
 	{ NULL,                NULL,     "Event Tester",0,         0,          0,           1,        -1,      0 }, /* xev */
