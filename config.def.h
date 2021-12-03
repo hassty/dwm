@@ -119,7 +119,7 @@ static const MonitorRule monrules[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-c", "-l", "10", "-h", "20", "-n", "-i", NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-c", "-l", "10", "-h", "20", "-i", NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 /*First arg only serves to match against key in rules*/
