@@ -191,7 +191,7 @@ static Key keys[] = {
     { MODKEY,                       41,        togglefullscr,   { 0 } },
     { MODKEY,                       19,        view,            { .ui = ~0 } },
     { MODKEY|ShiftMask,             19,        tag,             { .ui = ~0 } },
-    { MODKEY,                       58,        focusmon,        { .i = -1 } },
+    { MODKEY|ControlMask,           58,        focusmon,        { .i = -1 } },
     { MODKEY,                       61,        focusmon,        { .i = +1 } },
     { MODKEY|ShiftMask,             58,        tagmon,          { .i = -1 } },
     { MODKEY|ShiftMask,             61,        tagmon,          { .i = +1 } },
