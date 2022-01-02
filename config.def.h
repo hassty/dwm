@@ -60,6 +60,7 @@ static const Rule rules[] = {
 	{ "obs",               NULL,     NULL,          1 << 6,    0,          0,          -1,        -1,      0 },
 	{ "St",                NULL,     NULL,          0,         0,          1,          -1,        -1,      0 },
 	{ "Gnome-calculator",  NULL,     NULL,          0,         1,          0,          -1,        -1,      0 },
+	{ "Florence",          NULL,     NULL,          0,         1,          0,          -1,        -1,      'k' },
 	{ "edb",               NULL,     NULL,          0,         0,          0,          -1,        -1,      0 },
 	{ NULL,                NULL,     "scratchpad",  0,         1,          0,          -1,        -1,      't' },
 	{ NULL,                NULL,     "vifm",        0,         1,          0,          -1,        -1,      'f' },
@@ -125,6 +126,7 @@ static const char *termcmd[]  = { "st", NULL };
 /*First arg only serves to match against key in rules*/
 static const char *scratchpadcmd[] = {"t", "st", "-t", "scratchpad", NULL}; 
 static const char *vifmcmd[]       = {"f", "st", "-t", "vifm", "-e", "/home/hasty/.config/vifm/scripts/vifmrun", NULL}; 
+static const char *keyboardcmd[] = {"k", "florence", NULL};
 
 /*
  * Xresources preferences to load at startup
@@ -161,6 +163,7 @@ static Key keys[] = {
     { MODKEY,                       27,        spawndefault,    { 0 } },
     { MODKEY,                       25,        togglescratch,   { .v = scratchpadcmd } },
     { MODKEY,                       26,        togglescratch,   { .v = vifmcmd } },
+    { MODKEY,                       57,        togglescratch,   { .v = keyboardcmd } },
     { MODKEY,                       56,        togglebar,       { 0 } },
     { MODKEY,                       39,        swapfocus,       { 0 } },
     { MODKEY,                       44,        focusstack,      { .i = +1 } },
@@ -235,21 +238,27 @@ static Key keys[] = {
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static Button buttons[] = {
 	/* click                event mask      button          function        argument */
-	{ ClkLtSymbol,          0,              Button1,        setlayout,      { 0 } },
-	{ ClkLtSymbol,          0,              Button3,        setlayout,      { .v = &layouts[2] } },
-	{ ClkWinTitle,          0,              Button2,        zoom,           { 0 } },
-	{ ClkStatusText,        0,              Button1,        sigstatusbar,   { .i = 1 } },
+    { ClkLtSymbol,          0,              Button1,        setlayout,      { 0 } },
+    { ClkLtSymbol,          0,              Button2,        togglescratch,  { .v = keyboardcmd } },
+    { ClkLtSymbol,          0,              Button3,        setlayout,      { .v = &layouts[0] } },
+	{ ClkLtSymbol,          0,              Button4,        cyclelayout,    { .i = -1 } },
+	{ ClkLtSymbol,          0,              Button5,        cyclelayout,    { .i = +1 } },
+    { ClkWinTitle,          0,              Button1,        zoom,           { 0 } },
+	{ ClkWinTitle,          0,              Button2,        spawn,          { .v = dmenucmd } },
+    { ClkWinTitle,          0,              Button3,        killclient,     { 0 } },
+	{ ClkWinTitle,          0,              Button4,        focusstack,     { .i = -1 } },
+    { ClkWinTitle,          0,              Button5,        focusstack,     { .i = +1 } },
+    { ClkStatusText,        0,              Button1,        sigstatusbar,   { .i = 1 } },
 	{ ClkStatusText,        0,              Button2,        sigstatusbar,   { .i = 2 } },
 	{ ClkStatusText,        0,              Button3,        sigstatusbar,   { .i = 3 } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      { 0 } },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, { 0 } },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    { 0 } },
 	{ ClkTagBar,            0,              Button1,        view,           { 0 } },
+	{ ClkTagBar,            0,              Button2,        spawndefault,   { 0 } },
 	{ ClkTagBar,            0,              Button3,        toggleview,     { 0 } },
+    { ClkTagBar,            0,              Button4,        shiftview,      { .i = -1 } },
+	{ ClkTagBar,            0,              Button5,        shiftview,      { .i = +1 } },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            { 0 } },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      { 0 } },
-    { ClkTagBar,            0,              Button1,        view,           { 0 } },
-    { ClkTagBar,            0,              Button3,        toggleview,     { 0 } },
-    { ClkTagBar,            MODKEY,         Button1,        tag,            { 0 } },
-    { ClkTagBar,            MODKEY,         Button3,        toggletag,      { 0 } },
 };
