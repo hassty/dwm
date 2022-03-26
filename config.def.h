@@ -38,7 +38,7 @@ static char *colors[][3] = {
 
 /* tagging */
 static const char *tags[] = { "", "", "", "", "ﭮ", "", "", "", "" };
-static const char *defaulttagapps[] = {"st", "pcmanfm", "freetube", "firefox", "discord", NULL, NULL, NULL, NULL };
+static const char *defaulttagapps[] = {"st", "pcmanfm", "freetube", "firefox", "discord", NULL, NULL, "virtualbox", NULL };
 
 static const unsigned int ulinepad	= 4;	/* horizontal padding between the underline and tag */
 static const unsigned int ulinestroke	= 2;	/* thickness / height of the underline */
