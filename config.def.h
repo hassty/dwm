@@ -259,8 +259,8 @@ static Button buttons[] = {
 	{ ClkTagBar,            0,              Button1,        view,           { 0 } },
 	{ ClkTagBar,            0,              Button2,        spawndefault,   { 0 } },
 	{ ClkTagBar,            0,              Button3,        toggleview,     { 0 } },
-    { ClkTagBar,            0,              Button4,        shiftview,      { .i = -1 } },
-	{ ClkTagBar,            0,              Button5,        shiftview,      { .i = +1 } },
+    { ClkTagBar,            0,              Button4,        shiftviewjump,  { .i = -1 } },
+	{ ClkTagBar,            0,              Button5,        shiftviewjump,  { .i = +1 } },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            { 0 } },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      { 0 } },
 };
