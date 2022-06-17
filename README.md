@@ -24,6 +24,7 @@
  - restartsig
  - savefloats
  - shiftview
+ - statusallmons
  - statuscmd
  - sticky
  - swallow
