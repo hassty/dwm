@@ -122,6 +122,7 @@ static const MonitorRule monrules[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-c", "-l", "10", "-h", "20", "-i", NULL };
 static const char *clipboardcmd[] = { "roficlip", NULL };
+static const char *sessioncmd[] = { "session", NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 /*First arg only serves to match against key in rules*/
@@ -232,7 +233,7 @@ static Key keys[] = {
     TAGKEYS(                        17,        7)
     TAGKEYS(                        18,        8)
     { MODKEY,                       32,        winview,         { 0 } },
-    { MODKEY|ShiftMask,             24,        quit,            { 0 } },
+    { MODKEY|ShiftMask,             24,        spawn,           { .v = sessioncmd } },
     { MODKEY|ShiftMask,             27,        quit,            { 1 } },
 };
 
