@@ -127,7 +127,7 @@ static const char *termcmd[]  = { "st", NULL };
 
 /*First arg only serves to match against key in rules*/
 static const char *scratchpadcmd[] = {"t", "st", "-t", "scratchpad", NULL}; 
-static const char *vifmcmd[]       = {"f", "st", "-t", "vifm", "-e", "/home/hasty/.config/vifm/scripts/vifmrun", NULL}; 
+static const char *vifmcmd[]       = {"f", "st", "-t", "vifm", "-e", "vifmrun", NULL}; 
 static const char *keyboardcmd[] = {"k", "florence", NULL};
 
 /*
