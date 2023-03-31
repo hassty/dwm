@@ -121,8 +121,8 @@ static const MonitorRule monrules[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-c", "-l", "10", "-h", "20", "-i", NULL };
-static const char *clipboardcmd[] = { "roficlip", NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-n", "-c", "-l", "10", "-i", NULL };
+static const char *clipboardcmd[] = { "clipmenu", "-n", "-i", "-bw", "0", "-b", NULL };
 static const char *sessioncmd[] = { "session", NULL };
 static const char *termcmd[]  = { "st", NULL };
 
