@@ -38,7 +38,7 @@ static char *colors[][3] = {
 
 /* tagging */
 static const char *tags[] = { "", "", "", "", "ﭮ", "", "", "", "" };
-static const char *defaulttagapps[] = {"st", "pcmanfm", "freetube", "firefox", "discord", NULL, NULL, "virtualbox", NULL };
+static const char *defaulttagapps[] = {"st", "pcmanfm", "freetube", "librewolf", "discord", NULL, NULL, "virtualbox", NULL };
 
 static const unsigned int ulinepad	= 4;	/* horizontal padding between the underline and tag */
 static const unsigned int ulinestroke	= 2;	/* thickness / height of the underline */
@@ -55,6 +55,7 @@ static const Rule rules[] = {
 	{ "FreeTube",          NULL,     NULL,          1 << 2,    0,          0,          -1,        -1,      0 },
 	{ "Ghidra",            NULL,     NULL,          1 << 2,    0,          0,          -1,        -1,      0 },
 	{ "firefox",           NULL,     NULL,          1 << 3,    0,          0,          -1,        -1,      0 },
+	{ "LibreWolf",         NULL,     NULL,          1 << 3,    0,          0,          -1,        -1,      0 },
 	{ "discord",           NULL,     NULL,          1 << 4,    0,          0,          -1,        -1,      0 },
 	{ "mpv",               NULL,     NULL,          1 << 5,    0,          0,           0,        -1,      0 },
 	{ "obs",               NULL,     NULL,          1 << 6,    0,          0,          -1,        -1,      0 },
